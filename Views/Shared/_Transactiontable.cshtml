@@ -1,0 +1,59 @@
+﻿
+<div class="tblClass" style="overflow-x:inherit;">
+    <br />
+    <div style="width:100%; overflow:auto auto;">
+        <table id="transactionDatatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Basket_num</th>
+                    <th>Purchase_date</th>
+                    <th>Spend</th>
+                    <th>Units</th>
+                    <th>Store_region</th>
+                    <th>Week_num</th>
+                    <th>Product_num</th>
+                    <th>Hshd_num</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tabs").hide();
+        $.ajax({
+            type: "POST",
+            url: "/Home/TransactionTable",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            complete: function () {
+                $("#tabs").show();
+                $(".container").hide();
+
+            }
+        }).done(function (data) {
+            $('#transactionDatatable').dataTable({
+                "bFilter": false,
+                "bLengthChange": false,
+                'iDisplayLength': 18,
+                data: data,
+                columns: [
+                    { "data": "basket_num" },
+                    { "data": "purchase_date" },
+                    { "data": "spend" },
+                    { "data": "units" },
+                    { "data": "store_region" },
+                    { "data": "week_num" },
+                    { "data": "product_num" },
+                    { "data": "hshd_num" },
+                ]
+            });
+            
+        });
+        
+    });
+</script>
