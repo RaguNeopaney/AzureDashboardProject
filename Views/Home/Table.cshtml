@@ -1,31 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Table Page";
 }
-<link rel="stylesheet" href="~/css/loader.css" />
-<div class="container">
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="ball"></div>
-    <div class="loading"><h1>loading</h1></div>
-</div>
 <div class="tabs" id="tabs">
     <input type="radio" name="tab" id="tab1" checked="checked">
-    <label id="lbltabhead1" for="tab1">Households</label>
+    <label id="lbltabhead1" for="tab1">Transaction</label>
     <input type="radio" name="tab" id="tab2">
-        <label id="lbltabhead2" for="tab2">Transaction</label>
+    <label id="lbltabhead2" for="tab2">Households</label>
     <input type="radio" name="tab" id="tab3">
         <label id="lbltabhead3" for="tab3">Products</label>
   
     <div class="tab-content-wrapper">
       <div id="tab-content-1" class="tab-content">
-            <partial name="~/Views/Shared/_householdtable.cshtml" />
+            <partial name="~/Views/Shared/_Transactiontable.cshtml" />
       </div>
       <div id="tab-content-2" class="tab-content">
-            <partial name="~/Views/Shared/_Transactiontable.cshtml" />
+            <partial name="~/Views/Shared/_householdtable.cshtml" />
       </div>
       <div id="tab-content-3" class="tab-content">
             <partial name="~/Views/Shared/_Producttable.cshtml" />

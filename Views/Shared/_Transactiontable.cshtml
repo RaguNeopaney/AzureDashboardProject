@@ -1,59 +1,53 @@
 ﻿
-<div class="tblClass" style="overflow-x:inherit;">
-    <br />
-    <div style="width:100%; overflow:auto auto;">
-        <table id="transactionDatatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Basket_num</th>
-                    <th>Purchase_date</th>
-                    <th>Spend</th>
-                    <th>Units</th>
-                    <th>Store_region</th>
-                    <th>Week_num</th>
-                    <th>Product_num</th>
-                    <th>Hshd_num</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.1/fh-3.3.1/r-2.4.0/sc-2.0.7/datatables.min.css" />
+<table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+            <th>Basket_num</th>
+            <th>Purchase_date</th>
+            <th>Spend</th>
+            <th>Units</th>
+            <th>Store_region</th>
+            <th>Week_num</th>
+            <th>Product_num</th>
+            <th>Hshd_num</th>
+            </tr>
+        </thead>
+</table>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.1/fh-3.3.1/r-2.4.0/sc-2.0.7/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#tabs").hide();
-        $.ajax({
+    $(document).on('preInit.dt', function (e, settings) {
+        var api = new $.fn.dataTable.Api(settings);
+        toastr.success('Creating Table Please Wait', { timeout: 3 });
+    });
+    $('#example').DataTable({
+        initComplete: function () {
+            // Apply the search
+            toastr.success('Table Created', {timeout: 30000});
+        },
+        ajax: {
             type: "POST",
             url: "/Home/TransactionTable",
-            data: '{}',
+            dataSrc: '',
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            complete: function () {
-                $("#tabs").show();
-                $(".container").hide();
-
-            }
-        }).done(function (data) {
-            $('#transactionDatatable').dataTable({
-                "bFilter": false,
-                "bLengthChange": false,
-                'iDisplayLength': 18,
-                data: data,
-                columns: [
-                    { "data": "basket_num" },
-                    { "data": "purchase_date" },
-                    { "data": "spend" },
-                    { "data": "units" },
-                    { "data": "store_region" },
-                    { "data": "week_num" },
-                    { "data": "product_num" },
-                    { "data": "hshd_num" },
-                ]
-            });
-            
-        });
-        
+            dataType: "json"
+        },
+        columns: [
+            { "data": "basket_num" },
+            { "data": "purchase_date" },
+            { "data": "spend" },
+            { "data": "units" },
+            { "data": "store_region" },
+            { "data": "week_num" },
+            { "data": "product_num" },
+            { "data": "hshd_num" },
+        ],
+        scrollX: true,
+        "lengthChange": false,
+        "searching": false,
+        "pageLength": 17,
+        responsive: false,
     });
 </script>

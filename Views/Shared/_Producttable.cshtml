@@ -1,46 +1,37 @@
-﻿
-<div class="tblClass">
-    <br />
-    <div style="width:100%; overflow:auto auto;">
-        <table id="productDatatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Product_num</th>
-                    <th>Department</th>
-                    <th>Commodity</th>
-                    <th>Brand_type</th>
-                    <th>Natural_organic_flag</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+﻿<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.1/fh-3.3.1/r-2.4.0/sc-2.0.7/datatables.min.css" />
+<table id="example2" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>Product_num</th>
+            <th>Department</th>
+            <th>Commodity</th>
+            <th>Brand_type</th>
+            <th>Natural_organic_flag</th>
+        </tr>
+    </thead>
+</table>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.1/fh-3.3.1/r-2.4.0/sc-2.0.7/datatables.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $.ajax({
+    $('#example2').DataTable({
+        ajax: {
             type: "POST",
             url: "/Home/ProductTable",
-            data: '{}',
+            dataSrc: '',
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
-        }).done(function (data) {
-            $('#productDatatable').dataTable({
-                "bFilter": false,
-                'iDisplayLength': 18,
-                "bLengthChange": false,
-                scrollX: true,
-                data: data,
-                columns: [
-                    { "data": "product_num" },
-                    { "data": "department" },
-                    { "data": "commodity" },
-                    { "data": "brand_type" },
-                    { "data": "natural_organic_flag" }
-                ]
-            })
-        })
+            dataType: "json"
+        },
+        columns: [
+            { "data": "product_num" },
+            { "data": "department" },
+            { "data": "commodity" },
+            { "data": "brand_type" },
+            { "data": "natural_organic_flag" }
+        ],
+        scrollX: true,
+        "lengthChange": false,
+        "searching": false,
+        "pageLength": 17,
+        responsive: false,
     });
 </script>
+
