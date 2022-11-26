@@ -13,15 +13,7 @@ namespace Dashboard.Models
         public string Store_region { get; set; }
         public int Week_num { get; set; }
         public string Year { get; set; }
-
         public int Product_num { get; set; }
-
-        [ForeignKey("Product_num")]
-        public Product Product { get; set; }
-
         public int Hshd_num { get; set; }
-
-        [ForeignKey("Hshd_num")]
-        public Households Households { get; set; }
     }
 }
